@@ -1,32 +1,51 @@
-# Detecção de Transações Fraudulentas em Criptomoedas
+# 🛡️ Detecção de Transações Fraudulentas em Criptomoedas
 
-Este projeto demonstra na prática como construir um modelo XGBoost para classificar transações financeiras com criptomoedas a fim de detectar possíveis fraudes. Utilizando técnicas avançadas de programação orientada a objetos e pipelines de Machine Learning, o projeto visa criar um sistema robusto para prevenir atividades fraudulentas no mercado de criptomoedas.
+Este projeto apresenta a construção de um sistema para detecção de fraudes em transações financeiras com criptomoedas, utilizando **XGBoost** e técnicas avançadas de **programação orientada a objetos** e **pipelines de Machine Learning**. O objetivo é criar um modelo robusto que contribua para a prevenção de atividades fraudulentas no mercado de criptomoedas.
 
-**Fonte dos dados:**  
-Os dados foram extraídos do [Kaggle - Ethereum Fraudulent Transactions Dataset](https://www.kaggle.com/datasets/vagifa/ethereum).
+## Fonte dos Dados  
+Os dados utilizados no projeto foram extraídos do [Kaggle - Ethereum Fraudulent Transactions Dataset](https://www.kaggle.com/datasets/vagifa/ethereum).
 
+---
 
-## Estrutura do Projeto  
-O estudo foi segmentado nas seguintes etapas:  
+## Estrutura do Projeto
 
-### 1. Ajustes Iniciais
-Nesta etapa, foram realizadas as importações necessárias e verificou-se que o *dataframe* apresentava espaçamentos nos nomes das colunas, o que poderia causar problemas futuros. Este problema foi resolvido para garantir consistência no processamento dos dados.  
+### 1. Pré-Processamento Inicial  
+- Realização de importações necessárias.  
+- Ajuste dos nomes das colunas no *dataframe* para remover espaços em branco, evitando possíveis problemas no processamento.
 
-### 2. Feature Engineering
-Ao fazer uma analise nos dados percebi que havia muitas colunas com dados constantes (valores unicos), com isso realizei a remoção delas.
+---
 
-### 3. Criando o Pipeline
-Para evitar ajustes no deploy, como por exemplo: padronização e preenchimento de dados faltantes, crei um pipeline que facilita esses ajustes. Foram 4 classes criadadas, sendo uma delas a classe 'mãe' que herda os BaseEstimator , TransformerMixin. Segue a descrição que inclui no Jupyter:
-![image](https://github.com/user-attachments/assets/e7943267-c01f-4c3b-9864-c2428ae0954c)
+### 2. Engenharia de Atributos (*Feature Engineering*)  
+- Identificação e remoção de colunas com valores constantes (valores únicos), reduzindo a dimensionalidade e otimizando o modelo.
 
-### 4. Criando o Pipeline de Machine Learning 
-Após esse pré-processamento, criei o pipeline com o modelo de classificação. O escolhido foi o XGBClassifier
-![image](https://github.com/user-attachments/assets/de053bf5-5be1-41f4-b70c-c665633b33c9)
+---
 
-### 5. Treinamento
-Com todos pipelinas feitos, realizei o treinamento que teve um retorno de 97% de AUC e o Recall de 95%
+### 3. Construção de Pipelines  
+- Desenvolvimento de pipelines que simplificam o fluxo de pré-processamento e treinamento, evitando ajustes manuais no momento do deploy.  
+- Foram implementadas **quatro classes**, incluindo uma classe base que herda de `BaseEstimator` e `TransformerMixin`. Essa abordagem modulariza e organiza o código.  
 
-### 6. Deploy 
-Ao aprovar o modelo, salvo ele em disco (utilizando o joblib) carrego novamente e aplico em novos dados.
-Os dados devem ter o mesmo formato que utilizei para treinar o modelo 
+![Pipeline Exemplo](https://github.com/user-attachments/assets/e7943267-c01f-4c3b-9864-c2428ae0954c)
+
+---
+
+### 4. Pipeline de Machine Learning  
+- Integração do pipeline de pré-processamento ao modelo de classificação **XGBClassifier**, garantindo escalabilidade e eficiência no treinamento.  
+
+![Pipeline de ML](https://github.com/user-attachments/assets/de053bf5-5be1-41f4-b70c-c665633b33c9)
+
+---
+
+### 5. Treinamento  
+- Treinamento realizado utilizando o pipeline completo.  
+- Métricas de desempenho alcançadas:  
+  - **AUC**: 97%  
+  - **Recall**: 95%  
+
+---
+
+### 6. Deploy  
+- O modelo final é salvo em disco com **Joblib** e pode ser carregado para aplicação em novos dados.  
+- Os dados de entrada para o modelo devem seguir o mesmo formato utilizado no treinamento.
+
+---
 
